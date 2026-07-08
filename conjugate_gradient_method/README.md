@@ -1,16 +1,27 @@
-# Conjugate Gradient Method - Overleaf Project
+# Méthode du gradient conjugué
 
-This rebuilt Overleaf project uses the professional layout version as `main.tex`.
+Projet académique (LaTeX/Overleaf) sur la **méthode du gradient conjugué** :
+théorie, convergence finie, interprétation en optimisation quadratique, un
+exemple numérique détaillé et une annexe contenant du code Python.
 
-## Import in Overleaf
+## Contenu
 
-1. Upload the full ZIP archive to Overleaf.
-2. Set `main.tex` as the main document if Overleaf does not select it automatically.
-3. Compile with `pdfLaTeX`.
+- `main.tex` : source LaTeX principale (prête pour Overleaf).
+- `Logo_of_the_Pantheon-Sorbonne_University_in_Paris.png` : logo de la page de titre.
 
-## Contents
+## Thèmes abordés
 
-- `main.tex`: final LaTeX source matching the professional visual layout shown in the screenshots.
-- `Logo_of_the_Pantheon-Sorbonne_University_in_Paris.png`: logo used on the title page.
+- résolution de systèmes linéaires symétriques définis positifs ;
+- construction de directions conjuguées ;
+- convergence en au plus `n` itérations (dimension du système) ;
+- interprétation comme minimisation d'une forme quadratique ;
+- comparaison avec la descente de gradient ;
+- exemple numérique et code Python en annexe.
 
-The project is about the Conjugate Gradient method, with theoretical sections, finite convergence, a detailed numerical example, practical considerations, references, and an appendix with Python code.
+## Compilation
+
+Ouvrir `main.tex` dans Overleaf, ou compiler localement :
+
+```bash
+pdflatex main.tex
+```

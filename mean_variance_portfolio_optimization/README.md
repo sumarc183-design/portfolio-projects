@@ -1,50 +1,55 @@
-# Mean-Variance Portfolio Optimization
+# Optimisation de portefeuille moyenne-variance
 
-Academic quantitative finance project implementing and comparing numerical optimization methods for a mean-variance portfolio allocation problem.
+Projet académique de finance quantitative : implémentation et comparaison de
+méthodes d'optimisation numérique pour un problème d'allocation de portefeuille
+moyenne-variance.
 
-The objective is to minimize
+L'objectif est de minimiser
 
 ```text
 J(x) = x.T @ Sigma @ x - phi * mu.T @ x
 ```
 
-under the portfolio constraints:
+sous les contraintes de portefeuille :
 
-- the weights sum to one;
-- no short selling in the constrained version;
-- a risk-return trade-off controlled by `phi`.
+- les poids somment à un ;
+- pas de vente à découvert dans la version contrainte ;
+- un arbitrage rendement-risque contrôlé par `phi`.
 
-## Methods Implemented
+## Méthodes implémentées
 
-- equality-constraint reduction from dimension `n` to `n - 1`;
-- steepest descent with exact Wolfe-compliant line search;
-- Newton method with strong Wolfe line search;
-- linear conjugate gradient on the optimality system;
-- SciPy BFGS and Newton-CG reference solvers;
-- constrained optimization on the simplex with SLSQP;
-- convergence and portfolio-weight plots.
+- réduction de la contrainte d'égalité de la dimension `n` à `n - 1` ;
+- descente de gradient à pas exact (recherche linéaire compatible Wolfe) ;
+- méthode de Newton avec recherche linéaire de Wolfe forte ;
+- gradient conjugué linéaire sur le système d'optimalité ;
+- solveurs de référence SciPy (BFGS, Newton-CG) ;
+- optimisation contrainte sur le simplexe avec SLSQP ;
+- tracés de convergence et des poids du portefeuille.
 
-## Main Takeaways
+## Enseignements principaux
 
-The unconstrained methods converge to the same minimizer up to numerical precision, but with very different speeds:
+Les méthodes non contraintes convergent vers le même minimiseur à la précision
+numérique près, mais à des vitesses très différentes :
 
-- steepest descent requires many iterations because it only uses first-order information;
-- Newton's method is extremely fast on this quadratic objective;
-- conjugate gradient is well suited to the associated linear system;
-- the constrained simplex solution changes the allocation by enforcing nonnegative weights.
+- la descente de gradient demande beaucoup d'itérations (information de premier
+  ordre uniquement) ;
+- la méthode de Newton est très rapide sur cet objectif quadratique ;
+- le gradient conjugué est bien adapté au système linéaire associé ;
+- la solution contrainte sur le simplexe modifie l'allocation en imposant des
+  poids positifs.
 
-## Run
+## Exécution
 
-Install dependencies:
+Installer les dépendances :
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the script:
+Lancer le script :
 
 ```bash
 python mean_variance_portfolio.py
 ```
 
-Generated figures are written to `figures/`.
+Les figures générées sont écrites dans `figures/`.
