@@ -1,0 +1,1349 @@
+\documentclass[11pt,a4paper]{report}
+
+% ============================================================
+% PACKAGES
+% ============================================================
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.7cm,bottom=2.5cm}
+\setlength{\headheight}{22pt}
+
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{titlesec}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\baselinestretch}{1.08}
+
+% ============================================================
+% COLORS
+% ============================================================
+\definecolor{bleufonce}{RGB}{28,39,55}
+\definecolor{or}{RGB}{176,132,45}
+\definecolor{codeblue}{RGB}{20,20,140}
+\definecolor{codegray}{RGB}{120,120,120}
+\definecolor{codepurple}{RGB}{120,0,160}
+\definecolor{backcolour}{RGB}{245,245,240}
+\definecolor{lightblue}{RGB}{235,244,252}
+\definecolor{lightgold}{RGB}{255,249,232}
+\definecolor{lightgreen}{RGB}{237,248,240}
+\definecolor{lightgraybox}{RGB}{248,249,250}
+\definecolor{darkgreen}{RGB}{32,96,68}
+\definecolor{darkred}{RGB}{128,45,45}
+
+% ============================================================
+% AVOID WORD HYPHENATION
+% ============================================================
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\sloppy
+
+% ============================================================
+% CHAPTER TITLE STYLE
+% ============================================================
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{bleufonce}\centering}
+  {\colorbox{bleufonce}{\parbox{0.55\textwidth}{\centering\color{white}\Large \chaptername\ \thechapter}}}
+  {0.4cm}
+  {\Huge}
+  [\vspace{0.15cm}{\color{or}\titlerule[1.2pt]}]
+
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\huge\bfseries\color{bleufonce}\centering}
+  {}
+  {0pt}
+  {\Huge}
+  [\vspace{0.15cm}{\color{or}\titlerule[1.2pt]}]
+
+\titlespacing*{\chapter}
+  {0pt}
+  {-0.4cm}
+  {0.9cm}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{bleufonce}}
+  {\thesection}
+  {0.6em}
+  {}
+  [\vspace{-0.15cm}{\color{or}\titlerule[0.8pt]}]
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{bleufonce}}
+  {\thesubsection}
+  {0.6em}
+  {}
+
+% ============================================================
+% PYTHON STYLE
+% ============================================================
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  backgroundcolor=\color{lightgraybox},
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codeblue}\bfseries,
+  stringstyle=\color{codepurple},
+  commentstyle=\color{codegray}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{codegray},
+  stepnumber=1,
+  numbersep=6pt,
+  frame=single,
+  rulecolor=\color{bleufonce!50},
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b,
+  xleftmargin=0.5cm,
+  xrightmargin=0.2cm
+}
+\lstset{style=pythonstyle}
+
+% ============================================================
+% PROFESSIONAL BOXES AND THEOREM ENVIRONMENTS
+% ============================================================
+\tcbset{
+  before skip=10pt,
+  after skip=10pt,
+  boxsep=1.2mm,
+  left=2mm,
+  right=2mm,
+  top=1.5mm,
+  bottom=1.5mm
+}
+
+\newtcolorbox{infobox}[1][]{
+  enhanced, breakable,
+  colback=lightblue,
+  colframe=bleufonce,
+  boxrule=0.8pt,
+  arc=2mm,
+  borderline west={3pt}{0pt}{or},
+  title=#1,
+  fonttitle=\bfseries\color{white},
+  coltitle=white,
+  attach boxed title to top left={xshift=4mm,yshift=-2mm},
+  boxed title style={colback=bleufonce, colframe=bleufonce, arc=2mm}
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+
+\tcolorboxenvironment{definition}{
+  enhanced, breakable,
+  colback=lightblue,
+  colframe=bleufonce,
+  boxrule=0.8pt,
+  arc=2mm,
+  borderline west={3pt}{0pt}{bleufonce}
+}
+
+\tcolorboxenvironment{theorem}{
+  enhanced, breakable,
+  colback=lightgold,
+  colframe=or,
+  boxrule=0.9pt,
+  arc=2mm,
+  borderline west={3pt}{0pt}{or}
+}
+
+\tcolorboxenvironment{proposition}{
+  enhanced, breakable,
+  colback=lightgreen,
+  colframe=darkgreen,
+  boxrule=0.8pt,
+  arc=2mm,
+  borderline west={3pt}{0pt}{darkgreen}
+}
+
+\tcolorboxenvironment{lemma}{
+  enhanced, breakable,
+  colback=white,
+  colframe=bleufonce!70,
+  boxrule=0.8pt,
+  arc=2mm,
+  borderline west={3pt}{0pt}{bleufonce!70}
+}
+
+\tcolorboxenvironment{corollary}{
+  enhanced, breakable,
+  colback=lightgold,
+  colframe=or!80,
+  boxrule=0.8pt,
+  arc=2mm,
+  borderline west={3pt}{0pt}{or!80}
+}
+
+\tcolorboxenvironment{example}{
+  enhanced, breakable,
+  colback=lightgraybox,
+  colframe=black!45,
+  boxrule=0.6pt,
+  arc=2mm
+}
+
+\tcolorboxenvironment{remark}{
+  enhanced, breakable,
+  colback=lightgraybox,
+  colframe=darkred!70,
+  boxrule=0.7pt,
+  arc=2mm,
+  borderline west={3pt}{0pt}{darkred!70}
+}
+
+\renewenvironment{proof}[1][Proof]{%
+  \begin{tcolorbox}[enhanced, breakable, colback=white, colframe=black!25, boxrule=0.5pt, arc=1.5mm, borderline west={2pt}{0pt}{black!45}, title=\textbf{#1}, coltitle=bleufonce, fonttitle=\bfseries]
+}{%
+  \hfill$\square$\end{tcolorbox}
+}
+
+% ============================================================
+% CUSTOM COMMANDS
+% ============================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+
+% ============================================================
+% HEADER AND FOOTER
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\textcolor{bleufonce}{Conjugate Gradient Method}}
+\fancyhead[R]{\footnotesize\textcolor{bleufonce}{\nouppercase{\rightmark}}}
+\fancyfoot[C]{\footnotesize\textcolor{bleufonce}{Page \thepage{} / \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{or}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{or}\leaders\hrule height \footrulewidth\hfill}}
+% ============================================================
+% DOCUMENT
+% ============================================================
+\begin{document}
+
+% ============================================================
+% COVER PAGE
+% ============================================================
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+
+    % Diagonal band at the top left
+    \fill[bleufonce] 
+        (current page.north west) --
+        ([xshift=3.8cm]current page.north west) --
+        ([xshift=-1.2cm,yshift=-5.2cm]current page.north west) --
+        (current page.north west);
+
+    \fill[or] 
+        ([xshift=3.4cm]current page.north west) --
+        ([xshift=4.0cm]current page.north west) --
+        ([xshift=-0.8cm,yshift=-5.2cm]current page.north west) --
+        ([xshift=-1.3cm,yshift=-5.2cm]current page.north west);
+
+    % Diagonal band at the bottom right
+    \fill[bleufonce]
+        (current page.south east) --
+        ([xshift=-4.2cm]current page.south east) --
+        ([xshift=1.4cm,yshift=5.2cm]current page.south east) --
+        (current page.south east);
+
+    \fill[or]
+        ([xshift=-3.8cm]current page.south east) --
+        ([xshift=-4.4cm]current page.south east) --
+        ([xshift=0.9cm,yshift=5.2cm]current page.south east) --
+        ([xshift=1.5cm,yshift=5.2cm]current page.south east);
+
+\end{tikzpicture}
+
+\centering
+
+\vspace*{0.5cm}
+\IfFileExists{Logo_of_the_Pantheon-Sorbonne_University_in_Paris.png}{%
+\includegraphics[width=0.25\textwidth]{Logo_of_the_Pantheon-Sorbonne_University_in_Paris.png}%
+}{%
+\vspace*{0.3cm}\textbf{Paris 1 Panth\'eon-Sorbonne}\vspace*{0.3cm}%
+}
+
+\vspace{0.5cm}
+
+{\large Paris 1 Panthéon-Sorbonne University\par}
+\vspace{0.15cm}
+{\large U.F.R. 27 -- Mathematics and Computer Science\par}
+
+\vspace{2.1cm}
+
+{\large\scshape Project Report\par}
+\vspace{0.15cm}
+{\large\scshape Master 2 MMMEF\par}
+\vspace{0.15cm}
+{\large\scshape Mathematical Methods in Economics and Finance\par}
+
+\vspace{1.9cm}
+
+{\Large\bfseries\color{or} TOPIC\par}
+
+\vspace{0.4cm}
+
+{\Huge\bfseries\color{bleufonce}
+Conjugate Gradient Method:\\[0.2cm]
+Theory, Implementation and Applications
+\par}
+
+\vfill
+
+\vspace{-1.5cm}
+
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+\raggedright
+{\large Written by:\par}
+\vspace{0.35cm}
+\begin{itemize}
+    \item Marc SU
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\raggedright
+{\large Supervised by:\par}
+\vspace{0.35cm}
+\begin{itemize}
+    \item Professor Gisella Croce
+\end{itemize}
+\end{minipage}
+
+\vspace{1.5cm}
+
+{\large Academic year 2025 -- 2026\par}
+
+\end{titlepage}
+
+% ============================================================
+% ACKNOWLEDGEMENTS AND INTRODUCTION
+% ============================================================
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+I would like to sincerely thank my professor for the convex analysis course and for the mathematical material that made this project possible. This work allowed me to deepen my understanding of iterative methods, quadratic optimization and numerical linear algebra.
+
+I would also like to thank the teaching team for the guidance provided throughout the semester, which helped me connect theoretical results with practical implementation.
+
+\vspace{0.8cm}
+
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+
+\begin{infobox}[Key idea of the project]
+This project studies the Conjugate Gradient method as both a numerical linear algebra algorithm and an optimization method. The central idea is to solve a symmetric positive definite linear system $Ax=b$ by minimizing the strictly convex quadratic function
+\[
+f(x)=\frac12 x^\top A x-b^\top x.
+\]
+The report emphasizes the link between theory and implementation: the method is derived from exact line search, the search directions are built to be $A$-conjugate, and the iterates belong to Krylov subspaces. From a computational point of view, the algorithm is attractive because it avoids matrix inversion and only requires matrix-vector products, scalar products and vector updates.
+
+The main contribution of the numerical part is to implement the method from scratch in Python, verify the assumptions on the matrix, compare the result with a direct solver, and track the residual norm along the iterations. This reinforces the interpretation of the method as a bridge between optimization theory, numerical linear algebra and scientific computing.
+\end{infobox}
+
+\vspace{0.8cm}
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+The Conjugate Gradient method is a fundamental iterative algorithm in numerical linear algebra and optimization. It is mainly used to solve large linear systems of the form
+\[
+A x = b,
+\]
+where $A$ is symmetric positive definite. Such systems appear in many applications, including scientific computing, engineering, numerical optimization and discretized partial differential equations.
+
+The purpose of this report is to present the theoretical foundations of the Conjugate Gradient method, its interpretation as an optimization algorithm, its finite convergence property, and its connection with Krylov subspaces. The report also includes a detailed numerical example that illustrates the construction of gradients, step lengths and conjugate directions.
+
+The Conjugate Gradient method is remarkable because it combines the efficiency of iterative methods with a finite convergence guarantee in exact arithmetic. Unlike steepest descent, which may converge slowly when the matrix is ill-conditioned, the Conjugate Gradient method builds search directions that are mutually conjugate with respect to the matrix $A$. This property prevents the algorithm from undoing progress made in previous iterations.
+
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% CHAPTER 1
+% ============================================================
+\chapter{Mathematical Framework}
+
+\section{The linear system}
+
+We consider the linear system
+\[
+A x = b,
+\]
+where
+\[
+A\in\mathbb{R}^{n\times n},\qquad b\in\mathbb{R}^n,\qquad x\in\mathbb{R}^n.
+\]
+
+\begin{definition}[Symmetric positive definite matrix]
+A matrix $A\in\mathbb{R}^{n\times n}$ is symmetric positive definite if
+\[
+A^\top=A
+\]
+and
+\[
+x^\top A x>0
+\]
+for every nonzero vector $x\in\mathbb{R}^n$.
+\end{definition}
+
+\begin{remark}
+The assumption that $A$ is symmetric positive definite is essential for the classical Conjugate Gradient method. It guarantees that the associated quadratic function is strictly convex and has a unique minimizer.
+\end{remark}
+
+
+
+\section{Inner product induced by a positive definite matrix}
+
+A central idea in the Conjugate Gradient method is that orthogonality is not only measured with the usual Euclidean scalar product. Since the matrix $A$ is symmetric positive definite, it defines its own geometry.
+
+\begin{definition}[$A$-inner product and $A$-norm]
+Let $A\in\mathbb{R}^{n\times n}$ be symmetric positive definite. For $x,y\in\mathbb{R}^n$, the $A$-inner product is defined by
+\[
+\langle x,y\rangle_A=x^\top Ay.
+\]
+The associated $A$-norm is
+\[
+\norm{x}_A=\sqrt{x^\top A x}.
+\]
+\end{definition}
+
+\begin{proposition}[The $A$-inner product is well-defined]
+If $A$ is symmetric positive definite, then $\langle x,y\rangle_A=x^\top Ay$ defines an inner product on $\mathbb{R}^n$.
+\end{proposition}
+
+\begin{proof}
+We verify the three main properties of an inner product. First, for all $x,y\in\mathbb{R}^n$, bilinearity follows from the linearity of matrix multiplication. Second, since $A$ is symmetric, we have
+\[
+\langle x,y\rangle_A=x^\top Ay=(x^\top Ay)^\top=y^\top A^\top x=y^\top Ax=\langle y,x\rangle_A.
+\]
+Finally, since $A$ is positive definite,
+\[
+\langle x,x\rangle_A=x^\top Ax>0
+\]
+for every nonzero vector $x$. Therefore, $\langle \cdot,\cdot\rangle_A$ is an inner product and $\norm{\cdot}_A$ is the associated norm.
+\end{proof}
+
+\section{Equivalent quadratic minimization problem}
+
+The Conjugate Gradient method can be derived by reformulating the linear system as an optimization problem. Consider the quadratic function
+\[
+f(x)=\frac12 x^\top A x-b^\top x+c,
+\]
+where $c\in\mathbb{R}$ is a constant.
+
+\begin{proposition}[Gradient of the quadratic function]
+If $A$ is symmetric, then
+\[
+\nabla f(x)=Ax-b.
+\]
+\end{proposition}
+
+\begin{proof}
+The derivative of $\frac12 x^\top A x$ is $Ax$ when $A$ is symmetric, while the derivative of $-b^\top x$ is $-b$. Therefore,
+\[
+\nabla f(x)=Ax-b.
+\]
+\end{proof}
+
+\begin{theorem}[Equivalence between linear system and minimization]
+Assume that $A$ is symmetric positive definite. Then solving
+\[
+Ax=b
+\]
+is equivalent to minimizing
+\[
+f(x)=\frac12 x^\top A x-b^\top x+c.
+\]
+\end{theorem}
+
+\begin{proof}
+A minimizer of $f$ must satisfy the first-order optimality condition
+\[
+\nabla f(x)=0.
+\]
+Since
+\[
+\nabla f(x)=Ax-b,
+\]
+this condition is equivalent to
+\[
+Ax=b.
+\]
+Because $A$ is positive definite, the Hessian of $f$ is positive definite. Thus $f$ is strictly convex and the minimizer is unique.
+\end{proof}
+
+
+
+\section{Residual, error and gradient}
+
+It is useful to distinguish the residual, the error and the gradient of the quadratic function.
+
+\begin{definition}[Residual and error]
+Let $x^\ast$ be the exact solution of $Ax=b$. For an approximation $x_k$, the residual is defined by
+\[
+r_k=b-Ax_k,
+\]
+and the error is defined by
+\[
+e_k=x^\ast-x_k.
+\]
+\end{definition}
+
+\begin{proposition}[Link between residual and error]
+For every iteration $k$, the residual and the error satisfy
+\[
+r_k=Ae_k.
+\]
+Moreover, if $g_k=Ax_k-b$ denotes the gradient of the quadratic function, then
+\[
+g_k=-r_k.
+\]
+\end{proposition}
+
+\begin{proof}
+Since $x^\ast$ is the exact solution, we have $Ax^\ast=b$. Hence,
+\[
+r_k=b-Ax_k=Ax^\ast-Ax_k=A(x^\ast-x_k)=Ae_k.
+\]
+Furthermore, the gradient of the quadratic function is
+\[
+g_k=Ax_k-b.
+\]
+Therefore,
+\[
+g_k=-(b-Ax_k)=-r_k.
+\]
+This shows that making the residual small is equivalent to making the gradient close to zero.
+\end{proof}
+
+\begin{theorem}[Strict convexity and uniqueness]
+If $A$ is symmetric positive definite, then the function
+\[
+f(x)=\frac12 x^\top A x-b^\top x+c
+\]
+is strictly convex on $\mathbb{R}^n$. Consequently, it admits at most one minimizer.
+\end{theorem}
+
+\begin{proof}
+The Hessian matrix of $f$ is
+\[
+\nabla^2 f(x)=A.
+\]
+Since $A$ is symmetric positive definite, the Hessian is positive definite for all $x\in\mathbb{R}^n$. Therefore, $f$ is strictly convex. A strictly convex function can have at most one minimizer. Since the first-order condition $\nabla f(x)=0$ is equivalent to $Ax=b$, the minimizer is unique and coincides with the solution of the linear system.
+\end{proof}
+
+
+% ============================================================
+% CHAPTER 2
+% ============================================================
+\chapter{Conjugate Gradient Method}
+
+\section{A-conjugacy}
+
+\begin{definition}[A-conjugate vectors]
+Two vectors $p_i$ and $p_j$ are said to be $A$-conjugate if
+\[
+p_i^\top A p_j=0
+\qquad\text{for } i\neq j.
+\]
+\end{definition}
+
+\begin{remark}
+A-conjugacy generalizes the usual notion of orthogonality. In the Conjugate Gradient method, search directions are constructed to be mutually A-conjugate. This ensures that minimizing along one direction does not destroy the minimization already achieved along previous directions.
+\end{remark}
+
+
+
+\section{Exact line search}
+
+The step length used in the Conjugate Gradient method is obtained by minimizing the quadratic function along the current search direction.
+
+\begin{proposition}[Optimal step length]
+Let $d_k$ be a nonzero search direction. The value of $\rho_k$ that minimizes
+\[
+\varphi(\rho)=f(x_k+\rho d_k)
+\]
+is
+\[
+\rho_k=-\frac{g_k^\top d_k}{d_k^\top A d_k}.
+\]
+\end{proposition}
+
+\begin{proof}
+Define
+\[
+\varphi(\rho)=f(x_k+\rho d_k).
+\]
+Using the expression of $f$, we get
+\[
+\varphi(\rho)=\frac12 (x_k+\rho d_k)^\top A(x_k+\rho d_k)-b^\top(x_k+\rho d_k)+c.
+\]
+Differentiating with respect to $\rho$ gives
+\[
+\varphi'(\rho)=d_k^\top A(x_k+\rho d_k)-b^\top d_k.
+\]
+Since $g_k=Ax_k-b$, this becomes
+\[
+\varphi'(\rho)=d_k^\top g_k+\rho d_k^\top A d_k.
+\]
+At the minimum, $\varphi'(\rho_k)=0$, hence
+\[
+d_k^\top g_k+\rho_k d_k^\top A d_k=0.
+\]
+Therefore,
+\[
+\rho_k=-\frac{d_k^\top g_k}{d_k^\top A d_k}=-\frac{g_k^\top d_k}{d_k^\top A d_k}.
+\]
+Since $A$ is positive definite and $d_k\neq 0$, we have $d_k^\top A d_k>0$, so this value is well-defined.
+\end{proof}
+
+\section{Algorithm}
+
+The Fletcher-Reeves version of the Conjugate Gradient method is initialized by choosing $x_0\in\mathbb{R}^n$ and setting
+\[
+g_0=Ax_0-b,
+\qquad
+d_0=-g_0.
+\]
+
+At iteration $k$, the step length is
+\[
+\rho_k
+=
+-\frac{g_k^\top d_k}{d_k^\top A d_k}.
+\]
+Then
+\[
+x_{k+1}=x_k+\rho_k d_k,
+\]
+and the new gradient is
+\[
+g_{k+1}=Ax_{k+1}-b.
+\]
+The new direction is defined by
+\[
+d_{k+1}
+=
+-g_{k+1}
++
+\beta_k d_k,
+\]
+where
+\[
+\beta_k
+=
+\frac{\norm{g_{k+1}}^2}{\norm{g_k}^2}.
+\]
+
+\begin{algorithm}[H]
+\caption{Conjugate Gradient Method}
+\begin{algorithmic}[1]
+\State Choose $x_0\in\mathbb{R}^n$
+\State $g_0\gets Ax_0-b$
+\State $d_0\gets -g_0$
+\State $k\gets 0$
+\While{$\norm{g_k}>\text{tol}$ and $k<\text{max\_iter}$}
+    \State $\rho_k\gets -\dfrac{g_k^\top d_k}{d_k^\top A d_k}$
+    \State $x_{k+1}\gets x_k+\rho_k d_k$
+    \State $g_{k+1}\gets Ax_{k+1}-b$
+    \State $\beta_k\gets \dfrac{\norm{g_{k+1}}^2}{\norm{g_k}^2}$
+    \State $d_{k+1}\gets -g_{k+1}+\beta_k d_k$
+    \State $k\gets k+1$
+\EndWhile
+\State \Return $x_k$
+\end{algorithmic}
+\end{algorithm}
+
+\section{Interpretation of the steps}
+
+The algorithm can be understood as follows:
+\begin{itemize}
+    \item $g_k$ is the gradient of the quadratic objective at $x_k$;
+    \item $d_k$ is the search direction;
+    \item $\rho_k$ is the exact step length minimizing $f$ along $d_k$;
+    \item $\beta_k$ ensures that the new direction remains conjugate to the previous ones.
+\end{itemize}
+
+% ============================================================
+% CHAPTER 3
+% ============================================================
+\chapter{Orthogonality and Finite Convergence}
+
+\section{Orthogonality of gradients}
+
+The Conjugate Gradient method constructs a sequence of gradients $(g_k)$ that are mutually orthogonal:
+\[
+g_i^\top g_j=0
+\qquad\text{for }i\neq j.
+\]
+
+\begin{remark}
+This property explains why the method can terminate in a finite number of steps in exact arithmetic. Since it is impossible to have more than $n$ nonzero mutually orthogonal vectors in $\mathbb{R}^n$, the gradient must become zero after at most $n$ iterations.
+\end{remark}
+
+\section{Krylov subspaces}
+
+\begin{definition}[Krylov subspace]
+The $k$-th Krylov subspace associated with $A$ and $g_0$ is defined by
+\[
+\mathcal{K}_k(A,g_0)
+=
+\mathrm{span}\{g_0,Ag_0,A^2g_0,\dots,A^{k-1}g_0\}.
+\]
+\end{definition}
+
+The Conjugate Gradient iterates satisfy
+\[
+x_k\in x_0+\mathcal{K}_k(A,g_0).
+\]
+
+\begin{lemma}
+Let $U_k=\mathcal{K}_{k+1}(A,g_0)$. The sequence generated by the Conjugate Gradient method satisfies:
+\begin{enumerate}
+    \item $x_k\in x_0+U_{k-1}$;
+    \item $g_k\in U_k$;
+    \item $g_{k+1}=g_k+As_k$, where $s_k=x_{k+1}-x_k$;
+    \item $s_k\in U_k$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Since each iterate is obtained by adding a search direction belonging to a Krylov subspace, we have $x_k\in x_0+U_{k-1}$. Moreover,
+\[
+g_k=Ax_k-b.
+\]
+Using the expression of $x_k$ as an element of $x_0+U_{k-1}$ shows that $g_k\in U_k$. Finally,
+\[
+g_{k+1}
+=
+Ax_{k+1}-b
+=
+A(x_k+s_k)-b
+=
+g_k+As_k.
+\]
+Since both $x_{k+1}$ and $x_k$ belong to affine spaces generated by Krylov subspaces, their difference $s_k$ belongs to $U_k$.
+\end{proof}
+
+\begin{theorem}[Finite convergence of the Conjugate Gradient method]
+Let $A\in\mathbb{R}^{n\times n}$ be symmetric positive definite. In exact arithmetic, the Conjugate Gradient method converges to the exact solution of
+\[
+Ax=b
+\]
+in at most $n$ iterations.
+\end{theorem}
+
+\begin{proof}
+The Conjugate Gradient method constructs mutually orthogonal gradients and mutually A-conjugate search directions. Since $\mathbb{R}^n$ cannot contain more than $n$ nonzero mutually orthogonal vectors, the gradient must become zero after at most $n$ iterations. When $g_k=0$, we have
+\[
+Ax_k-b=0,
+\]
+and therefore
+\[
+Ax_k=b.
+\]
+Thus $x_k$ is the exact solution.
+\end{proof}
+
+% ============================================================
+% CHAPTER 4
+% ============================================================
+\chapter{Detailed Numerical Example}
+
+\section{Problem setup}
+
+Consider the system
+\[
+A x=b
+\]
+with
+\[
+A=
+\begin{pmatrix}
+4 & 1 & 0\\
+1 & 3 & 1\\
+0 & 1 & 2
+\end{pmatrix},
+\qquad
+b=
+\begin{pmatrix}
+1\\
+2\\
+3
+\end{pmatrix},
+\qquad
+x_0=
+\begin{pmatrix}
+0\\
+0\\
+0
+\end{pmatrix}.
+\]
+
+\section{Initialization}
+
+The initial gradient is
+\[
+g_0=Ax_0-b=
+\begin{pmatrix}
+-1\\
+-2\\
+-3
+\end{pmatrix},
+\]
+and the first search direction is
+\[
+d_0=-g_0=
+\begin{pmatrix}
+1\\
+2\\
+3
+\end{pmatrix}.
+\]
+
+\section{First iteration}
+
+We compute
+\[
+Ad_0=
+\begin{pmatrix}
+6\\
+10\\
+8
+\end{pmatrix},
+\qquad
+d_0^\top Ad_0=50,
+\qquad
+g_0^\top d_0=-14.
+\]
+Therefore,
+\[
+\rho_0=-\frac{g_0^\top d_0}{d_0^\top Ad_0}
+=
+-\frac{-14}{50}
+=
+0.28.
+\]
+Hence,
+\[
+x_1=x_0+\rho_0d_0=
+\begin{pmatrix}
+0.28\\
+0.56\\
+0.84
+\end{pmatrix}.
+\]
+
+The new gradient is
+\[
+g_1=Ax_1-b=
+\begin{pmatrix}
+-0.68\\
+-0.80\\
+0.76
+\end{pmatrix}.
+\]
+The Fletcher-Reeves coefficient is
+\[
+\beta_0=
+\frac{\norm{g_1}^2}{\norm{g_0}^2}
+=
+\frac{1.68}{14}
+=
+0.12.
+\]
+Thus,
+\[
+d_1=-g_1+\beta_0d_0=
+\begin{pmatrix}
+0.80\\
+1.04\\
+-0.40
+\end{pmatrix}.
+\]
+
+\section{Second and third iterations}
+
+Continuing the same computations gives
+\[
+x_2\approx
+\begin{pmatrix}
+0.1467\\
+0.3867\\
+0.9067
+\end{pmatrix},
+\qquad
+g_2\approx
+\begin{pmatrix}
+-0.0733\\
+-0.2267\\
+-0.0667
+\end{pmatrix}.
+\]
+After the third iteration, the exact solution is obtained:
+\[
+x_3=
+\begin{pmatrix}
+-0.1250\\
+1.5000\\
+0.7500
+\end{pmatrix},
+\qquad
+g_3\approx
+\begin{pmatrix}
+0\\
+0\\
+0
+\end{pmatrix}.
+\]
+
+\section{Verification properties}
+
+The directions are A-conjugate:
+\[
+d_0^\top A d_1=0,
+\qquad
+d_1^\top A d_2\approx 0.
+\]
+The gradients are orthogonal:
+\[
+g_0^\top g_1=0,
+\qquad
+g_1^\top g_2\approx 0,
+\qquad
+g_0^\top g_2\approx 0.
+\]
+
+\section{Numerical verification with Python}
+
+To complete the theoretical computations, we implemented the Conjugate Gradient method in Python. The objective of the implementation is to verify that the algorithm returns the same solution as the one obtained by manual computation.
+
+For the matrix
+\[
+A=
+\begin{pmatrix}
+4 & 1 & 0\\
+1 & 3 & 1\\
+0 & 1 & 2
+\end{pmatrix},
+\qquad
+b=
+\begin{pmatrix}
+1\\2\\3
+\end{pmatrix},
+\]
+the Python implementation returns the solution
+\[
+x=
+\begin{pmatrix}
+-0.125\\
+1.5\\
+0.75
+\end{pmatrix}.
+\]
+This confirms the result obtained in the detailed numerical example. In addition, the residual norm becomes close to zero after three iterations, which is consistent with the finite convergence property of the Conjugate Gradient method in exact arithmetic for a three-dimensional symmetric positive definite system.
+
+% ============================================================
+% CHAPTER 5
+% ============================================================
+\chapter{Applications and Practical Considerations}
+
+\section{Geometric interpretation}
+
+For a three-dimensional problem, the Conjugate Gradient method can be interpreted geometrically:
+\begin{itemize}
+    \item at the first iteration, the method searches along a line;
+    \item at the second iteration, it searches in a plane;
+    \item at the third iteration, it searches in the full space $\mathbb{R}^3$.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{c|c}
+\toprule
+Iteration & Search space \\
+\midrule
+0 & Initial point $x_0$ \\
+1 & Line $x_0+\mathrm{span}\{g_0\}$ \\
+2 & Plane $x_0+\mathrm{span}\{g_0,Ag_0\}$ \\
+3 & Full space $\mathbb{R}^3$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Preconditioning}
+
+In practice, the convergence of the Conjugate Gradient method can be slow when the matrix $A$ is ill-conditioned. A common improvement is preconditioning. Instead of solving
+\[
+Ax=b,
+\]
+one solves a transformed system such as
+\[
+M^{-1}Ax=M^{-1}b,
+\]
+where $M$ is chosen as an approximation of $A$ that is easier to invert.
+
+\section{Implementation strategy}
+
+The numerical implementation of the Conjugate Gradient method follows the theoretical algorithm presented in Chapter 2. The method is particularly efficient because it does not require the explicit computation of a matrix inverse. Instead, each iteration only relies on matrix-vector products, scalar products and vector updates.
+
+This is an important computational advantage. For large sparse matrices, storing the full matrix or computing a direct factorization may be expensive. In contrast, the Conjugate Gradient method can exploit sparsity and requires only a limited amount of memory. This makes it suitable for applications in numerical optimization, scientific computing and large-scale linear systems.
+
+In the implementation, the stopping criterion is based on the Euclidean norm of the residual
+\[
+r_k=b-Ax_k.
+\]
+Since the gradient of the quadratic objective is given by
+\[
+g_k=Ax_k-b=-r_k,
+\]
+checking whether the residual norm is small is equivalent to checking whether the gradient is close to zero. When
+\[
+\|r_k\|<\text{tol},
+\]
+the algorithm stops and returns the current approximation $x_k$.
+
+The implementation also stores the history of the residual norms. This allows us to analyze the convergence of the algorithm and verify that the residual decreases during the iterations.
+
+\section{Stopping criteria and numerical stability}
+
+In exact arithmetic, the Conjugate Gradient method converges in at most $n$ iterations for a matrix $A\in\mathbb{R}^{n\times n}$ that is symmetric positive definite. However, in floating-point arithmetic, round-off errors may affect the orthogonality of the gradients and the $A$-conjugacy of the directions.
+
+For this reason, practical implementations do not usually wait for the residual to become exactly zero. Instead, they use a stopping criterion such as
+\[
+\frac{\norm{r_k}}{\norm{b}}<\varepsilon,
+\]
+where $\varepsilon$ is a prescribed tolerance. This relative criterion is often preferable to an absolute criterion because it takes into account the scale of the right-hand side vector $b$.
+
+\begin{remark}
+A very small tolerance does not always improve the quality of the solution in finite precision. After a certain number of iterations, round-off errors may dominate and the residual norm may stagnate. Therefore, the tolerance must be chosen according to the numerical precision and the required accuracy of the application.
+\end{remark}
+
+\section{Computational cost}
+
+At each iteration, the main cost of the Conjugate Gradient method is the matrix-vector product $Ad_k$. If $A$ is dense, this operation costs approximately $O(n^2)$ operations. If $A$ is sparse, the cost is proportional to the number of nonzero coefficients of $A$, which can be much smaller.
+
+The memory cost is also limited. The algorithm only needs to store a few vectors of size $n$, such as $x_k$, $r_k$ and $d_k$. This gives a memory complexity of order $O(n)$, excluding the storage of the matrix itself.
+
+\begin{center}
+\begin{tabular}{p{0.32\textwidth}p{0.55\textwidth}}
+\toprule
+\textbf{Operation} & \textbf{Role in the algorithm} \\
+\midrule
+Matrix-vector product $Ad_k$ & Main computational cost of one iteration \\
+Scalar products & Used to compute the step size and the update coefficient \\
+Vector updates & Used to update the approximation, residual and direction \\
+Residual norm & Used to monitor convergence and stop the algorithm \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Preconditioned Conjugate Gradient method}
+
+The convergence of the Conjugate Gradient method depends strongly on the condition number $\kappa(A)$. When $\kappa(A)$ is large, the level sets of the quadratic function are elongated ellipsoids and the convergence may become slow. A standard remedy is to introduce a preconditioner.
+
+Let $M$ be a symmetric positive definite matrix that approximates $A$ and is easier to invert. The preconditioned system can be written as
+\[
+M^{-1}Ax=M^{-1}b.
+\]
+The objective is to choose $M$ such that the transformed system has a smaller condition number than the original one.
+
+\begin{definition}[Preconditioner]
+A preconditioner is a matrix $M$ chosen to improve the numerical properties of a linear system. In the context of the Conjugate Gradient method, $M$ should be symmetric positive definite and close enough to $A$, while remaining easy to solve in systems of the form $Mz=r$.
+\end{definition}
+
+\begin{remark}
+A good preconditioner reduces the number of iterations, but each iteration becomes slightly more expensive because one must solve an auxiliary system involving $M$. Therefore, the efficiency of preconditioning depends on the balance between the reduction in iterations and the additional cost per iteration.
+\end{remark}
+
+\section{Practical workflow}
+
+A complete numerical workflow for applying the Conjugate Gradient method can be summarized as follows:
+
+\begin{enumerate}
+    \item Check that the matrix $A$ is symmetric.
+    \item Verify that $A$ is positive definite, for example through Cholesky factorization or eigenvalue analysis.
+    \item Choose an initial point $x_0$.
+    \item Run the Conjugate Gradient algorithm with a tolerance adapted to the problem.
+    \item Monitor the residual norm $\norm{r_k}$.
+    \item Compare the result with a direct solver when the dimension is small enough.
+    \item For large or ill-conditioned systems, consider preconditioning.
+\end{enumerate}
+
+\section{Possible extensions}
+
+Several extensions could be considered to make this project more complete. First, one could compare the Conjugate Gradient method with the steepest descent method on the same quadratic function. This would highlight the advantage of conjugate directions over purely gradient-based descent directions.
+
+Second, one could study the impact of the condition number by generating symmetric positive definite matrices with different eigenvalue distributions. This would make it possible to visualize how conditioning affects the residual norm and the number of iterations.
+
+Third, one could implement a preconditioned version of the algorithm and compare the convergence with and without preconditioning. This would connect the theoretical convergence bound with practical numerical performance.
+
+\section{Advantages and limitations}
+
+\begin{center}
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\toprule
+\textbf{Advantages} & \textbf{Limitations} \\
+\midrule
+Finite convergence in exact arithmetic & Requires a symmetric positive definite matrix \\
+Low memory cost & Sensitive to conditioning \\
+Well suited for large sparse systems & May require preconditioning \\
+Strong theoretical guarantees & Loss of orthogonality may occur numerically \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+% CONCLUSION
+% ============================================================
+\chapter*{\centering\color{bleufonce}Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+
+The Conjugate Gradient method is an elegant and powerful algorithm that connects numerical linear algebra with optimization theory. By reformulating the linear system $Ax=b$ as the minimization of a strictly convex quadratic function, the method constructs a sequence of iterates using gradients and conjugate search directions.
+
+Its main theoretical strength lies in its finite convergence property. In exact arithmetic, for a symmetric positive definite matrix $A\in\mathbb{R}^{n\times n}$, the method reaches the exact solution in at most $n$ iterations. This result is explained by the orthogonality of gradients, the A-conjugacy of search directions and the structure of Krylov subspaces.
+
+From a practical point of view, the method is especially useful for large sparse systems because it requires only matrix-vector products and has a low memory footprint. However, its efficiency may deteriorate for ill-conditioned matrices, which motivates the use of preconditioning.
+
+Overall, the Conjugate Gradient method remains one of the most important iterative methods in computational mathematics, scientific computing and numerical optimization.
+
+This project also shows the importance of combining mathematical reasoning with computational verification. The theoretical results explain why the method works, while the Python implementation makes it possible to observe the behavior of the residuals, validate the numerical solution, and understand the practical role of stopping criteria and conditioning.
+
+\chapter*{\centering\color{bleufonce}References}
+\addcontentsline{toc}{chapter}{References}
+
+\begin{enumerate}
+    \item J. R. Shewchuk, \textit{An Introduction to the Conjugate Gradient Method Without the Agonizing Pain}, Carnegie Mellon University, 1994.
+    \item Y. Saad, \textit{Iterative Methods for Sparse Linear Systems}, SIAM, 2003.
+    \item J. Nocedal and S. J. Wright, \textit{Numerical Optimization}, Springer, 2006.
+    \item G. H. Golub and C. F. Van Loan, \textit{Matrix Computations}, Johns Hopkins University Press, 2013.
+\end{enumerate}
+
+% ============================================================
+% APPENDIX
+% ============================================================
+\appendix
+
+\chapter*{\centering\color{bleufonce}Appendix: Python Code}
+\addcontentsline{toc}{chapter}{Appendix: Python Code}
+\label{appendix:python}
+
+This appendix contains the Python implementation used to reproduce the numerical example presented in Chapter 4. The code implements the Conjugate Gradient algorithm from scratch, checks the assumptions on the matrix, prints the intermediate iterations, and compares the final result with NumPy's direct linear solver.
+
+\begin{lstlisting}[caption={Conjugate Gradient Python implementation},label={lst:cg-python}]
+import numpy as np
+
+
+def is_symmetric_positive_definite(A, tol=1e-12):
+    """
+    Check whether a matrix is symmetric positive definite.
+
+    A matrix A is symmetric positive definite if:
+    1. A is symmetric: A.T = A
+    2. all eigenvalues of A are strictly positive
+    """
+    if not np.allclose(A, A.T, atol=tol):
+        return False
+
+    eigenvalues = np.linalg.eigvals(A)
+    return np.all(eigenvalues > tol)
+
+
+def quadratic_function(A, b, x):
+    """
+    Compute the quadratic objective associated with Ax = b:
+
+        f(x) = 1/2 x.T A x - b.T x
+    """
+    return 0.5 * x.T @ A @ x - b.T @ x
+
+
+def conjugate_gradient(A, b, x0=None, tol=1e-10, max_iter=None,
+                       verbose=True):
+    """
+    Solve the linear system Ax = b using the Conjugate Gradient method.
+    """
+    n = len(b)
+
+    if x0 is None:
+        x = np.zeros(n)
+    else:
+        x = x0.astype(float).copy()
+
+    if max_iter is None:
+        max_iter = n
+
+    # Residual r_k = b - A x_k.
+    # Since g_k = A x_k - b = -r_k, the first descent direction is r_0.
+    r = b - A @ x
+    d = r.copy()
+
+    history = [np.linalg.norm(r)]
+
+    if verbose:
+        print("Initial point:")
+        print("x0 =", x)
+        print("Initial residual norm =", history[-1])
+        print("-" * 60)
+
+    for k in range(max_iter):
+        Ad = A @ d
+        denominator = d.T @ Ad
+
+        if abs(denominator) < 1e-15:
+            raise ValueError("The denominator is too close to zero.")
+
+        alpha = (r.T @ r) / denominator
+        x_new = x + alpha * d
+        r_new = r - alpha * Ad
+
+        residual_norm = np.linalg.norm(r_new)
+        history.append(residual_norm)
+
+        if verbose:
+            print(f"Iteration {k + 1}")
+            print("alpha =", alpha)
+            print("x =", x_new)
+            print("residual =", r_new)
+            print("residual norm =", residual_norm)
+            print("objective value =", quadratic_function(A, b, x_new))
+            print("-" * 60)
+
+        if residual_norm < tol:
+            return x_new, history
+
+        beta = (r_new.T @ r_new) / (r.T @ r)
+        d = r_new + beta * d
+
+        x = x_new
+        r = r_new
+
+    return x, history
+
+
+# Numerical example from the report
+A = np.array([
+    [4.0, 1.0, 0.0],
+    [1.0, 3.0, 1.0],
+    [0.0, 1.0, 2.0]
+])
+
+b = np.array([1.0, 2.0, 3.0])
+x0 = np.array([0.0, 0.0, 0.0])
+
+print("Is A symmetric positive definite?", is_symmetric_positive_definite(A))
+print("=" * 60)
+
+x_cg, residual_history = conjugate_gradient(
+    A=A,
+    b=b,
+    x0=x0,
+    tol=1e-12,
+    max_iter=10,
+    verbose=True
+)
+
+x_direct = np.linalg.solve(A, b)
+
+print("Final solution obtained with Conjugate Gradient:")
+print(x_cg)
+
+print("Direct solution using numpy.linalg.solve:")
+print(x_direct)
+
+print("Difference between both solutions:")
+print(np.linalg.norm(x_cg - x_direct))
+
+print("Residual history:")
+print(residual_history)
+
+print_convergence_table(residual_history)
+\end{lstlisting}
+
+The output confirms that the matrix is symmetric positive definite and that the Conjugate Gradient method reaches the exact solution in three iterations for this three-dimensional example. The solution is
+\[
+x=
+\begin{pmatrix}
+-0.125\\
+1.5\\
+0.75
+\end{pmatrix},
+\]
+which is consistent with the theoretical computations carried out in Chapter 4.
+
+\begin{lstlisting}[caption={Expected output of the Python implementation},label={lst:cg-output}]
+Is A symmetric positive definite? True
+============================================================
+Initial point:
+x0 = [0. 0. 0.]
+Initial residual norm = 3.7416573867739413
+------------------------------------------------------------
+Iteration 1
+alpha = 0.28
+x = [0.28 0.56 0.84]
+residual = [ 0.68  0.8  -0.76]
+residual norm = 1.296148139681572
+objective value = -1.96
+------------------------------------------------------------
+Iteration 2
+x approximately = [0.14666667 0.38666667 0.90666667]
+------------------------------------------------------------
+Iteration 3
+x approximately = [-0.125  1.5    0.75]
+residual norm approximately = 0
+------------------------------------------------------------
+Final solution obtained with Conjugate Gradient:
+[-0.125  1.5    0.75]
+\end{lstlisting}
+
+\end{document}

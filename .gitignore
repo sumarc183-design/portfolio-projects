@@ -1,0 +1,22 @@
+# Empêche d'ajouter par erreur des artefacts sensibles ou volumineux.
+*.pkl
+*.joblib
+*.parquet
+*.csv
+*.xlsx
+*.xls
+*.json
+*.zip
+*.log
+*.env
+*.docx
+*.pdf
+mlruns/
+local_outputs*/
+visible_artifacts/
+project_context/
+project_external_files/
+doc-workspace/input/
+doc-workspace/raw/
+doc-workspace/output/
+__pycache__/
