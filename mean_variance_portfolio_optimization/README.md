@@ -4,6 +4,8 @@ Projet académique de finance quantitative : implémentation et comparaison de
 méthodes d'optimisation numérique pour un problème d'allocation de portefeuille
 moyenne-variance.
 
+**📄 [Lire le rapport compilé (PDF)](Mean_Variance_Portfolio_Optimization.pdf)**
+
 L'objectif est de minimiser
 
 ```text

@@ -4,9 +4,12 @@ Projet académique (LaTeX/Overleaf) sur la **méthode du gradient conjugué** :
 théorie, convergence finie, interprétation en optimisation quadratique, un
 exemple numérique détaillé et une annexe contenant du code Python.
 
+**📄 [Lire le rapport compilé (PDF)](Conjugate_Gradient_Method.pdf)**
+
 ## Contenu
 
 - `main.tex` : source LaTeX principale (prête pour Overleaf).
+- [`Conjugate_Gradient_Method.pdf`](Conjugate_Gradient_Method.pdf) : version PDF compilée.
 - `Logo_of_the_Pantheon-Sorbonne_University_in_Paris.png` : logo de la page de titre.
 
 ## Thèmes abordés
