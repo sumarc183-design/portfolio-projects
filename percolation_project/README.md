@@ -4,10 +4,12 @@ Projet académique en probabilités, simulation et théorie des graphes.
 
 Le rapport étudie la percolation par arêtes sur une grille finie. Chaque arête est ouverte indépendamment avec une probabilité `p`, puis une simulation détecte l'existence d'un chemin ouvert reliant le bord gauche au bord droit.
 
+**📄 [Lire le rapport compilé (PDF)](Percolation_FR_final.pdf)**
+
 ## Contenu
 
 - `main.tex` : source LaTeX principal, prêt pour Overleaf.
-- `Percolation_FR_final.pdf` : version PDF compilée.
+- [`Percolation_FR_final.pdf`](Percolation_FR_final.pdf) : version PDF compilée.
 - `figures/` : figures utilisées dans le rapport.
 
 ## Thèmes abordés
