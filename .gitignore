@@ -10,7 +10,6 @@
 *.log
 *.env
 *.docx
-*.pdf
 mlruns/
 local_outputs*/
 visible_artifacts/
