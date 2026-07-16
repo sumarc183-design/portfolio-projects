@@ -11,6 +11,7 @@ Le rapport étudie la percolation par arêtes sur une grille finie. Chaque arêt
 - `main.tex` : source LaTeX principal, prêt pour Overleaf.
 - [`Percolation_FR_final.pdf`](Percolation_FR_final.pdf) : version PDF compilée.
 - `figures/` : figures utilisées dans le rapport.
+- [`percolation.py`](percolation.py) : code de simulation, exécutable directement.
 
 ## Thèmes abordés
 
@@ -25,3 +26,17 @@ Le rapport étudie la percolation par arêtes sur une grille finie. Chaque arêt
 ## Utilisation Overleaf
 
 Importer ce dossier ou un zip contenant ces fichiers dans Overleaf, puis compiler `main.tex` avec `pdfLaTeX`.
+
+## Exécution du code Python
+
+Installer les dépendances :
+
+```bash
+pip install -r requirements.txt
+```
+
+Lancer le script :
+
+```bash
+python percolation.py
+```

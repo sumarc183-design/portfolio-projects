@@ -11,6 +11,7 @@ exemple numérique détaillé et une annexe contenant du code Python.
 - `main.tex` : source LaTeX principale (prête pour Overleaf).
 - [`Conjugate_Gradient_Method.pdf`](Conjugate_Gradient_Method.pdf) : version PDF compilée.
 - `Logo_of_the_Pantheon-Sorbonne_University_in_Paris.png` : logo de la page de titre.
+- [`conjugate_gradient.py`](conjugate_gradient.py) : code Python de l'annexe, exécutable directement.
 
 ## Thèmes abordés
 
@@ -27,4 +28,18 @@ Ouvrir `main.tex` dans Overleaf, ou compiler localement :
 
 ```bash
 pdflatex main.tex
+```
+
+## Exécution du code Python
+
+Installer les dépendances :
+
+```bash
+pip install -r requirements.txt
+```
+
+Lancer le script :
+
+```bash
+python conjugate_gradient.py
 ```
