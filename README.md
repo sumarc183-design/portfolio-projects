@@ -7,6 +7,7 @@ Ce dépôt regroupe des projets **académiques et personnels** présentés sous 
 - **[Mean-Variance Portfolio Optimization](mean_variance_portfolio_optimization/)** — projet personnel de finance quantitative : optimisation moyenne-variance (Markowitz) et comparaison de méthodes numériques (descente de gradient à pas exact, Newton avec recherche linéaire de Wolfe, gradient conjugué, SLSQP sous contraintes) en Python.
 - **[Conjugate Gradient Method](conjugate_gradient_method/)** — projet académique (LaTeX/Overleaf) sur la méthode du gradient conjugué : convergence finie, interprétation en optimisation quadratique et exemple numérique Python.
 - **[Percolation par arêtes](percolation_project/)** — projet académique (LaTeX/Overleaf) sur la percolation : simulation Monte Carlo, détection de chemins ouverts, transition autour de `p = 1/2` et dualité planaire. [📄 Rapport PDF](percolation_project/Percolation_FR_final.pdf)
+- **[Epidemic Spread Modeling](epidemic_spread_modeling/)** — projet académique sur la modélisation de propagation épidémique : modèles SIR, CUIR et VSIRS résolus par schéma d'Euler explicite. [📄 Rapport PDF](epidemic_spread_modeling/Epidemic_Spread_Modeling_with_SIR_CUIR_and_VSIRS_Models.pdf)
 
 ## Compétences mobilisées
 
